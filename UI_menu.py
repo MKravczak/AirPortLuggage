@@ -56,17 +56,31 @@ descriptionA = CTK.CTkLabel(master=work_zoneB, width=400,  text="Luggage's Data:
 descriptionA.pack(pady=5)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-work_zoneC = CTK.CTkFrame(master=work_zoneA, width=400, height=350 ,  fg_color="black", border_color="#17AB99", border_width=1)
-work_zoneC.pack(pady=20, padx=20,side="top", fill="both")
+work_zoneC = CTK.CTkFrame(master=work_zoneA, width=400, height=350, fg_color="black", border_color="#17AB99", border_width=1)
+work_zoneC.pack(pady=20, padx=20, side="top", fill="both")
 
-luggage_input = CTK.CTkEntry(master=work_zoneC, width=40,font=CTK.CTkFont(family="terminal", size=20, weight="bold"), height= 40, corner_radius=3,  text_color="Black",fg_color="#17AB99")
-luggage_input.pack(pady=10, padx=20, side="left", anchor="nw")
-luggage_id = luggage_input.get()
-print(luggage_id)
-button = CTK.CTkButton(master=work_zoneC, width=150, height= 40, corner_radius=3,  text_color="Black",fg_color="#17AB99", font=CTK.CTkFont(family="terminal", size=15, weight="normal"), hover_color="#84AAAF", text="Check Luggage By ID", command=lambda: Model.LuggageByID(luggage_input.get(),work_zoneB))
-button.pack(pady=10, padx=10, side="left", anchor="nw")
+luggage_frame = CTK.CTkFrame(master=work_zoneC, fg_color="black")
+luggage_frame.pack(pady=10, padx=20, side="top", fill="x")
 
-print(luggage_id)
+luggage_input = CTK.CTkEntry(master=luggage_frame, width=100, font=CTK.CTkFont(family="terminal", size=20, weight="bold"), height=40, corner_radius=3, text_color="Black", fg_color="#17AB99")
+luggage_input.pack(pady=5, padx=5, side="left")
+
+button1 = CTK.CTkButton(master=luggage_frame, width=200, height=40, corner_radius=3, text_color="Black", fg_color="#17AB99", font=CTK.CTkFont(family="terminal", size=15, weight="normal"), hover_color="#84AAAF", text="Check Luggage By ID", command=lambda: Model.LuggageByID(luggage_input.get(), work_zoneB))
+button1.pack(pady=5, padx=5, side="left")
+
+passanger_frame = CTK.CTkFrame(master=work_zoneC, fg_color="black")
+passanger_frame.pack(pady=10, padx=20, side="top", fill="x")
+
+passanger_input = CTK.CTkEntry(master=passanger_frame, width=100, font=CTK.CTkFont(family="terminal", size=20, weight="bold"), height=40, corner_radius=3, text_color="Black", fg_color="#17AB99")
+passanger_input.pack(pady=5, padx=5, side="left")
+
+button2 = CTK.CTkButton(master=passanger_frame, width=300, height=40, corner_radius=3, text_color="Black", fg_color="#17AB99", font=CTK.CTkFont(family="terminal", size=15, weight="normal"), hover_color="#84AAAF", text="Check Passanger By Passport Number", command=lambda: Model.LuggageByOwner(passanger_input.get(), work_zoneB))
+button2.pack(pady=5, padx=5, side="left")
+
+
+
+
+
 
 
 

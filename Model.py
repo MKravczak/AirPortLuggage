@@ -91,3 +91,34 @@ def LuggageByID(luggage_id, work_zoneB):
             return
     error_label = CTK.CTkLabel(master=work_zoneB, text="No luggage found with the given ID.", text_color="red")
     error_label.pack(pady=5, padx=5, side="top")
+
+
+def LuggageByOwner(passport_number, work_zoneB):
+    clear_work_zoneB(work_zoneB)
+    try:
+        passport_number = int(passport_number)
+    except ValueError:
+        error_label = CTK.CTkLabel(master=work_zoneB, text="Invalid passport number. Please enter a number.", text_color="red")
+        error_label.pack(pady=5, padx=5, side="top")
+        return
+
+    for i in baggages:
+        if i.passport == passport_number:
+            id_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=f" ID:  {i.luggage_id} \n", text_color="white")
+            id_label.pack(pady=5, padx=5, side="top", anchor="nw")
+            type_label = CTK.CTkLabel(master=work_zoneB,font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=f" Type:  {i.type}\n", text_color="White")
+            type_label.pack(pady=5, padx=5, side="top",anchor="nw")
+            owner_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=f" Owner:  {i.owner_name} {i.owner_surnname}\n ", text_color="White")
+            owner_label.pack(pady=5, padx=5, side="top",anchor="nw")
+            ownerPassport_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
+                                       text=f" Passport Number:  {i.passport}\n ", text_color="White")
+            ownerPassport_label.pack(pady=5, padx=5, side="top", anchor="nw")
+            if i.weight > 15:
+                weight_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=f" Weight:  {i.weight}kg \n ", text_color="red")
+            else:
+                weight_label = CTK.CTkLabel(master=work_zoneB,font=CTK.CTkFont(family="terminal", size=15, weight="normal"),  text=f" Weight:  {i.weight}kg\n ", text_color="green")
+            weight_label.pack(pady=5, padx=5, side="top",anchor="nw")
+            destination_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=f" Destination:  {i.destination}\n ", text_color="White")
+    else:
+        error_label = CTK.CTkLabel(master=work_zoneB, text="No luggage found with the given ID.", text_color="red")
+        error_label.pack(pady=5, padx=5, side="top")
