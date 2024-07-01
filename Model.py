@@ -10,8 +10,8 @@ from random import choices
 
 names = ["John", "Jane", "Jack", "Jill", "James", "Jenny", "Jasper", "Jasmine", "Jared", "Jade"]
 surnames = ["Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor"]
-types= ["suitcase","hiking bag","backpack"]
-departures = ["New York", "Lodon", "Paris", "Berlin", "Tokyo", "Beijing"]
+types= ["Suitcase","Hiking bag","Backpack"]
+departures = ["New York", "London", "Paris", "Berlin", "Tokyo", "Beijing"]
 baggages = []
 passengers_list = []
 
@@ -102,23 +102,22 @@ def LuggageByOwner(passport_number, work_zoneB):
         error_label.pack(pady=5, padx=5, side="top")
         return
 
-    for i in baggages:
-        if i.passport == passport_number:
-            id_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=f" ID:  {i.luggage_id} \n", text_color="white")
-            id_label.pack(pady=5, padx=5, side="top", anchor="nw")
-            type_label = CTK.CTkLabel(master=work_zoneB,font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=f" Type:  {i.type}\n", text_color="White")
-            type_label.pack(pady=5, padx=5, side="top",anchor="nw")
-            owner_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=f" Owner:  {i.owner_name} {i.owner_surnname}\n ", text_color="White")
-            owner_label.pack(pady=5, padx=5, side="top",anchor="nw")
+    for i in passengers_list:
+        if i.passport_number == passport_number:
+            owner_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=f" Owner:  {i.name} {i.surname}\n ", text_color="White")
+            owner_label.pack(pady=5, padx=5, side="top", anchor="nw")
             ownerPassport_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
-                                       text=f" Passport Number:  {i.passport}\n ", text_color="White")
+                                       text=f" Passport Number:  {i.passport_number}\n ", text_color="White")
             ownerPassport_label.pack(pady=5, padx=5, side="top", anchor="nw")
-            if i.weight > 15:
-                weight_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=f" Weight:  {i.weight}kg \n ", text_color="red")
-            else:
-                weight_label = CTK.CTkLabel(master=work_zoneB,font=CTK.CTkFont(family="terminal", size=15, weight="normal"),  text=f" Weight:  {i.weight}kg\n ", text_color="green")
-            weight_label.pack(pady=5, padx=5, side="top",anchor="nw")
-            destination_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=f" Destination:  {i.destination}\n ", text_color="White")
+            ownerDOB_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=f" Date of Birth:  {i.date_of_birth} \n ", text_color="White")
+            ownerDOB_label.pack(pady=5, padx=5, side="top", anchor="nw")
+            luggage_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=" Luggage: ", text_color="White")
+            luggage_label.pack(pady=5, padx=5, side="top", anchor="nw")
+            for j in baggages:
+                if j.owner_name == i.name and j.owner_surnname == i.surname:
+                    luggage_list = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text=f"   {j.type} registered with ID {j.luggage_id} weighing {j.weight}kg to {j.destination}\n", text_color="White")
+                    luggage_list.pack(pady=5, padx=5, side="top", anchor="nw")
+            return
     else:
         error_label = CTK.CTkLabel(master=work_zoneB, text="No luggage found with the given ID.", text_color="red")
         error_label.pack(pady=5, padx=5, side="top")
