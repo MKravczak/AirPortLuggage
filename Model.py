@@ -12,6 +12,7 @@ surnames = ["Smith", "Johnson", "Williams", "Jones", "Polansky", "Jordan", "Tail
             "Gordon", "La Vine", "Chamberlain", "Davis", "Miller", "Wilson", "Moore", "Taylor"]
 types = ["Suitcase", "Hiking bag", "Backpack"]
 departures = ["New York", "London", "Paris", "Berlin", "Tokyo", "Beijing"]
+citizenship = ["USA", "UK", "France", "Germany", "Japan", "China", "Russia", "Italy", "Spain", "Canada", "Australia","Turkey","Poland","Brazil","Mexico","Argentina","India","South Africa","Egypt","Greece"]
 baggages = []
 passengers_list = []
 baggage = []
@@ -31,10 +32,10 @@ def LuggageCreate():
         passport = random.randint(100000, 999999)
         date_of = date_of_birth()
         baggage = Luggage.Luggage(i, name, surname, str(passport), round(random.uniform(8, 20), 2),
-                                  random.choice(departures), str((numpy.random.choice(types, 1, p=[0.7, 0.2, 0.1])[0])))
+                                  random.choice(departures), str((numpy.random.choice(types , 1, p=[0.7, 0.2, 0.1])[0])))
         print(baggage)
         baggages.append(baggage)
-        owner = Flyers.passengers(name, surname, date_of, "USA", passport)
+        owner = Flyers.passengers(name, surname, date_of, random.choice(citizenship), passport)
         passengers_list.append(owner)
         print(owner)
 
@@ -80,7 +81,7 @@ def LuggageList(luggage_list_div):
     clear_luggage_list_div(luggage_list_div)
     for i in baggages:
         listbox = CTK.CTkTextbox(master=luggage_list_div, width=400, height=20, fg_color="black",
-                                 border_color="#17AB99",  font=CTK.CTkFont(family="terminal", size=20, weight="bold"), activate_scrollbars=False, border_width=1)
+                                 border_color="#17AB99",  font=CTK.CTkFont(family="terminal", size=20, weight="normal"), activate_scrollbars=False, border_width=1)
         listbox.pack(pady=0)
         listbox.delete("1.0", "end")
         listbox.insert("end", f" ID:  {i.luggage_id}     Type:    {i.type}           \n")
@@ -91,10 +92,10 @@ def FlyersList(luggage_list_div):
     clear_luggage_list_div(luggage_list_div)
     for i in passengers_list:
         listbox = CTK.CTkTextbox(master=luggage_list_div, width=400, height=20, fg_color="black",
-                                 border_color="#17AB99", activate_scrollbars=False, border_width=1)
+                                 border_color="#17AB99", activate_scrollbars=False,font=CTK.CTkFont(family="terminal", size=19, weight="normal") ,border_width=1)
         listbox.pack(pady=0)
         listbox.delete("1.0", "end")
-        listbox.insert("end", f"   {i.name} {i.surname}           Passport: {i.passport_number}\n")
+        listbox.insert("end", f" {i.name} {i.surname}   Passport: {i.passport_number}\n")
         listbox.configure(state='disabled')
 
 
@@ -115,30 +116,30 @@ def LuggageByID(luggage_id, work_zoneB):
         return
     for i in baggages:
         if i.luggage_id == luggage_id:
-            id_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
+            id_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=20, weight="normal"),
                                     text=f" ID:  {i.luggage_id} \n", text_color="white")
             id_label.pack(pady=5, padx=5, side="top", anchor="nw")
-            type_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
+            type_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=20, weight="normal"),
                                       text=f" Type:  {i.type}\n", text_color="White")
             type_label.pack(pady=5, padx=5, side="top", anchor="nw")
-            owner_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
+            owner_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=20, weight="normal"),
                                        text=f" Owner:  {i.owner_name} {i.owner_surnname}\n ", text_color="White")
             owner_label.pack(pady=5, padx=5, side="top", anchor="nw")
             ownerPassport_label = CTK.CTkLabel(master=work_zoneB,
-                                               font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
+                                               font=CTK.CTkFont(family="terminal", size=20, weight="normal"),
                                                text=f" Passport Number:  {i.passport}\n ", text_color="White")
             ownerPassport_label.pack(pady=5, padx=5, side="top", anchor="nw")
             if i.weight > 15:
                 weight_label = CTK.CTkLabel(master=work_zoneB,
-                                            font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
+                                            font=CTK.CTkFont(family="terminal", size=20, weight="normal"),
                                             text=f" Weight:  {i.weight}kg \n ", text_color="red")
             else:
                 weight_label = CTK.CTkLabel(master=work_zoneB,
-                                            font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
+                                            font=CTK.CTkFont(family="terminal", size=20, weight="normal"),
                                             text=f" Weight:  {i.weight}kg\n ", text_color="green")
             weight_label.pack(pady=5, padx=5, side="top", anchor="nw")
             destination_label = CTK.CTkLabel(master=work_zoneB,
-                                             font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
+                                             font=CTK.CTkFont(family="terminal", size=20, weight="normal"),
                                              text=f" Destination:  {i.destination}\n ", text_color="White")
             destination_label.pack(pady=5, padx=5, side="top", anchor="nw")
             return
@@ -146,7 +147,7 @@ def LuggageByID(luggage_id, work_zoneB):
     error_label.pack(pady=5, padx=5, side="top")
 
 
-def LuggageByOwner(passport_number, work_zoneB):
+def OwnerProfile(passport_number, work_zoneB):
     clear_work_zoneB(work_zoneB)
     try:
         passport_number = int(passport_number)
@@ -158,26 +159,30 @@ def LuggageByOwner(passport_number, work_zoneB):
 
     for i in passengers_list:
         if i.passport_number == passport_number:
-            owner_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
+            owner_label = CTK.CTkLabel(master=work_zoneB, font=CTK.CTkFont(family="terminal", size=20, weight="normal"),
                                        text=f" Owner:  {i.name} {i.surname}\n ", text_color="White")
             owner_label.pack(pady=5, padx=5, side="top", anchor="nw")
             ownerPassport_label = CTK.CTkLabel(master=work_zoneB,
-                                               font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
+                                               font=CTK.CTkFont(family="terminal", size=20, weight="normal"),
                                                text=f" Passport Number:  {i.passport_number}\n ", text_color="White")
             ownerPassport_label.pack(pady=5, padx=5, side="top", anchor="nw")
+            ownerCitizenship_label = CTK.CTkLabel(master=work_zoneB,
+                                                    font=CTK.CTkFont(family="terminal", size=20, weight="normal"),
+                                                    text=f" Citizenship:  {i.citizenship}\n ", text_color="White")
+            ownerCitizenship_label.pack(pady=5, padx=5, side="top", anchor="nw")
             ownerDOB_label = CTK.CTkLabel(master=work_zoneB,
-                                          font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
+                                          font=CTK.CTkFont(family="terminal", size=20, weight="normal"),
                                           text=f" Date of Birth:  {i.date_of_birth} \n ", text_color="White")
             ownerDOB_label.pack(pady=5, padx=5, side="top", anchor="nw")
             luggage_label = CTK.CTkLabel(master=work_zoneB,
-                                         font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
+                                         font=CTK.CTkFont(family="terminal", size=20, weight="normal"),
                                          text=" Luggage: ", text_color="White")
             luggage_label.pack(pady=5, padx=5, side="top", anchor="nw")
             for j in baggages:
                 if j.owner_name == i.name and j.owner_surnname == i.surname:
                     luggage_list = CTK.CTkLabel(master=work_zoneB,
-                                                font=CTK.CTkFont(family="terminal", size=15, weight="normal"),
-                                                text=f"   {j.type} registered with ID {j.luggage_id} weighing {j.weight}kg to {j.destination}\n",
+                                                font=CTK.CTkFont(family="terminal", size=18, weight="normal"),
+                                                text=f"   {j.type} registered with ID {j.luggage_id}.\nWeighing {j.weight}kg to {j.destination}\n",
                                                 text_color="White")
                     luggage_list.pack(pady=5, padx=5, side="top", anchor="nw")
             return

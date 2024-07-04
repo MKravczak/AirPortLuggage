@@ -79,7 +79,7 @@ passanger_frame.pack(pady=10, padx=20, side="top", fill="x")
 passanger_input = CTK.CTkEntry(master=passanger_frame, width=100, font=CTK.CTkFont(family="terminal", size=20, weight="bold"), height=40, corner_radius=3, text_color="Black", fg_color="#17AB99")
 passanger_input.pack(pady=5, padx=5, side="left")
 
-button2 = CTK.CTkButton(master=passanger_frame, width=300, height=40, corner_radius=3, text_color="Black", fg_color="#17AB99", font=CTK.CTkFont(family="terminal", size=20, weight="normal"), hover_color="#84AAAF", text="Check Passanger By Passport Number", command=lambda: Model.LuggageByOwner(passanger_input.get(), work_zoneB))
+button2 = CTK.CTkButton(master=passanger_frame, width=300, height=40, corner_radius=3, text_color="Black", fg_color="#17AB99", font=CTK.CTkFont(family="terminal", size=20, weight="normal"), hover_color="#84AAAF", text="Check Passanger By Passport Number", command=lambda: Model.OwnerProfile(passanger_input.get(), work_zoneB))
 button2.pack(pady=5, padx=5, side="left")
 
 
