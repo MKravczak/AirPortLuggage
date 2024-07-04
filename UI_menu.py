@@ -39,20 +39,25 @@ work_zone_title.pack(pady=25)
 work_zone = CTK.CTkFrame(master=work_zoneA, width=200,  fg_color="black", border_color="#17AB99", border_width=1)
 work_zone.pack(pady=20, padx=20,side="left", fill="both")
 
-button = CTK.CTkButton(master=work_zone, width=200, height= 40, corner_radius=3,  text_color="Black",fg_color="#17AB99", hover_color="#84AAAF",font=CTK.CTkFont(family="terminal", size=15, weight="normal"),  text="Generate Luggage List", command=lambda: Model.LuggageCreate())
+button = CTK.CTkButton(master=work_zone, width=250, height= 40, corner_radius=3,  text_color="Black",fg_color="#17AB99", hover_color="#84AAAF",font=CTK.CTkFont(family="terminal", size=20, weight="normal"),  text="Generate Data", command=lambda: Model.LuggageCreate())
 button.pack(pady=10, padx=50, side="top", anchor="nw")
 
-button = CTK.CTkButton(master=work_zone, width=200, height= 40, corner_radius=3,  text_color="Black",fg_color="#17AB99", hover_color="#84AAAF", font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text="Show Luggage List", command=lambda: Model.LuggageList(luggage_list_div))
+
+button = CTK.CTkButton(master=work_zone, width=250, height= 40, corner_radius=3,  text_color="Black",fg_color="#17AB99", hover_color="#84AAAF", font=CTK.CTkFont(family="terminal", size=20, weight="normal"), text="Show Luggage List", command=lambda: Model.LuggageList(luggage_list_div))
 button.pack(pady=10, padx=50, side="top", anchor="nw")
 
-button = CTK.CTkButton(master=work_zone, width=200, height= 40, corner_radius=3,  text_color="Black",fg_color="#17AB99", hover_color="#84AAAF", font=CTK.CTkFont(family="terminal", size=15, weight="normal"), text="Show Passangers List", command=lambda: Model.FlyersList(luggage_list_div))
+button = CTK.CTkButton(master=work_zone, width=250, height= 40, corner_radius=3,  text_color="Black",fg_color="#17AB99", hover_color="#84AAAF", font=CTK.CTkFont(family="terminal", size=20, weight="normal"), text="Show Passangers List", command=lambda: Model.FlyersList(luggage_list_div))
 button.pack(pady=10, padx=50, side="top", anchor="nw")
+
+button = CTK.CTkButton(master=work_zone, width=250, height= 40, corner_radius=3,  text_color="Black",fg_color="#17AB99", hover_color="#84AAAF",font=CTK.CTkFont(family="terminal", size=20, weight="normal"),  text="Send Luggages to Gates", command=lambda: Model.Departures(departures_div))
+button.pack(pady=10, padx=50, side="top", anchor="nw")
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-work_zoneB = CTK.CTkFrame(master=work_zoneA, width=400, height=400,  fg_color="black", border_color="#17AB99", border_width=1)
+work_zoneB = CTK.CTkFrame(master=work_zoneA, width=400, height=600,  fg_color="black", border_color="#17AB99", border_width=1)
 work_zoneB.pack(pady=20, padx=20,side="top", fill="both")
 
-descriptionA = CTK.CTkLabel(master=work_zoneB, width=400,  text="Luggage's Data:", font=CTK.CTkFont(family="terminal", size=20, weight="bold"))
+descriptionA = CTK.CTkLabel(master=work_zoneB, width=400,  text="Output Screen", font=CTK.CTkFont(family="terminal", size=20, weight="bold"))
 descriptionA.pack(pady=5)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -65,7 +70,7 @@ luggage_frame.pack(pady=10, padx=20, side="top", fill="x")
 luggage_input = CTK.CTkEntry(master=luggage_frame, width=100, font=CTK.CTkFont(family="terminal", size=20, weight="bold"), height=40, corner_radius=3, text_color="Black", fg_color="#17AB99")
 luggage_input.pack(pady=5, padx=5, side="left")
 
-button1 = CTK.CTkButton(master=luggage_frame, width=200, height=40, corner_radius=3, text_color="Black", fg_color="#17AB99", font=CTK.CTkFont(family="terminal", size=15, weight="normal"), hover_color="#84AAAF", text="Check Luggage By ID", command=lambda: Model.LuggageByID(luggage_input.get(), work_zoneB))
+button1 = CTK.CTkButton(master=luggage_frame, width=200, height=40, corner_radius=3, text_color="Black", fg_color="#17AB99", font=CTK.CTkFont(family="terminal", size=20, weight="normal"), hover_color="#84AAAF", text="Check Luggage By ID", command=lambda: Model.LuggageByID(luggage_input.get(), work_zoneB))
 button1.pack(pady=5, padx=5, side="left")
 
 passanger_frame = CTK.CTkFrame(master=work_zoneC, fg_color="black")
@@ -74,7 +79,7 @@ passanger_frame.pack(pady=10, padx=20, side="top", fill="x")
 passanger_input = CTK.CTkEntry(master=passanger_frame, width=100, font=CTK.CTkFont(family="terminal", size=20, weight="bold"), height=40, corner_radius=3, text_color="Black", fg_color="#17AB99")
 passanger_input.pack(pady=5, padx=5, side="left")
 
-button2 = CTK.CTkButton(master=passanger_frame, width=300, height=40, corner_radius=3, text_color="Black", fg_color="#17AB99", font=CTK.CTkFont(family="terminal", size=15, weight="normal"), hover_color="#84AAAF", text="Check Passanger By Passport Number", command=lambda: Model.LuggageByOwner(passanger_input.get(), work_zoneB))
+button2 = CTK.CTkButton(master=passanger_frame, width=300, height=40, corner_radius=3, text_color="Black", fg_color="#17AB99", font=CTK.CTkFont(family="terminal", size=20, weight="normal"), hover_color="#84AAAF", text="Check Passanger By Passport Number", command=lambda: Model.LuggageByOwner(passanger_input.get(), work_zoneB))
 button2.pack(pady=5, padx=5, side="left")
 
 
@@ -87,12 +92,16 @@ button2.pack(pady=5, padx=5, side="left")
 
 
 
-departures_div = CTK.CTkFrame(master=frame, width=500,  fg_color="black", bg_color="aqua",border_color="#17AB99", border_width=1)
+departures_div = CTK.CTkFrame(master=frame, width=800,  fg_color="black", bg_color="aqua",border_color="#17AB99", border_width=1)
 departures_div.pack(pady=20, padx=20,side="left", fill="both")
 
 
 departures_div_title = CTK.CTkLabel(master=departures_div, width=500, text="Departures", font=CTK.CTkFont(family="terminal", size=20, weight="bold"))
 departures_div_title.pack(pady=25)
+
+
+thegates = CTK.CTkFrame(master=departures_div, width=450, fg_color="black", border_color="#17AB99", border_width=0)
+thegates.pack(pady=10, padx=20, side="left", fill="both", expand=True)
 
 
 
