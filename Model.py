@@ -17,6 +17,8 @@ baggages = []
 passengers_list = []
 baggage = []
 pssenger_list = []
+refused_baggage = []
+
 
 
 def date_of_birth():
@@ -50,7 +52,7 @@ def Departures(thegates):
         gate = CTK.CTkTextbox(
             master=thegates,
             width=300,
-            height=120,
+            height=130,
             fg_color="black",
             font=CTK.CTkFont(family="terminal", size=20, weight="bold"),
             text_color=main_color,
@@ -75,6 +77,37 @@ def Departures(thegates):
 def clear_luggage_list_div(luggage_list_div):
     for widget in luggage_list_div.winfo_children():
         widget.destroy()
+
+
+
+def DeparturesWithWeightLimit(thegates, weight_limit):
+    clear_work_zoneB(thegates)
+    departures_list = sorted(set(baggage.destination for baggage in baggages))
+    main_color = "#17AB99"
+
+    for index, destination in enumerate(departures_list):
+        # Create the main gate textbox
+        gate = CTK.CTkTextbox(
+            master=thegates,
+            width=300,
+            height=130,
+            fg_color="black",
+            font=CTK.CTkFont(family="terminal", size=20, weight="bold"),
+            text_color=main_color,
+            border_color=main_color,
+            activate_scrollbars=True,
+            border_width=2
+        )
+        gate.grid(row=index*2, column=0, pady=5, sticky="nsew")
+        gate.insert("end", f"Gate {index + 1} -> {destination}\n\n")
+
+        for baggage in baggages:
+            if baggage.destination == destination and baggage.weight <= weight_limit:
+                baggage_info = f"■ ID: {baggage.luggage_id} passport:{baggage.passport}"
+                gate.insert("end", baggage_info + "\n")
+
+        gate.tag_config('darkred', foreground='#990000')
+        gate.configure(state='disabled')
 
 
 def LuggageList(luggage_list_div):
@@ -189,3 +222,20 @@ def OwnerProfile(passport_number, work_zoneB):
     else:
         error_label = CTK.CTkLabel(master=work_zoneB, text="No luggage found with the given ID.", text_color="red")
         error_label.pack(pady=5, padx=5, side="top")
+
+
+def RejectedBaggage(rejected_baggage_frameB):
+    clear_luggage_list_div(rejected_baggage_frameB)
+    rejected_baggage_textboxB = CTK.CTkTextbox(master=rejected_baggage_frameB, width=500, height=250, fg_color="black",
+                                              border_color="#17AB99", activate_scrollbars=True, border_width=1,
+                                              font=CTK.CTkFont(family="terminal", size=18),
+                                              text_color="red")
+    rejected_baggage_textboxB.pack(pady=5, padx=5, side="top")
+
+    for i in baggages:
+        if i.weight > 15:
+            refused_baggage.append(i)
+            baggage_info = f"■ ID: {i.luggage_id}   passport:{i.passport}  Weight: {i.weight}kg\n"
+            print(baggage_info)
+            rejected_baggage_textboxB.insert("end", baggage_info)
+    rejected_baggage_textboxB.configure(state='disabled')

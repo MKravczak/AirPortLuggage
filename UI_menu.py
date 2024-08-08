@@ -49,9 +49,22 @@ button.pack(pady=10, padx=50, side="top", anchor="nw")
 button = CTK.CTkButton(master=work_zone, width=250, height= 40, corner_radius=3,  text_color="Black",fg_color="#17AB99", hover_color="#84AAAF", font=CTK.CTkFont(family="terminal", size=20, weight="normal"), text="Show Passangers List", command=lambda: Model.FlyersList(luggage_list_div))
 button.pack(pady=10, padx=50, side="top", anchor="nw")
 
-button = CTK.CTkButton(master=work_zone, width=250, height= 40, corner_radius=3,  text_color="Black",fg_color="#17AB99", hover_color="#84AAAF",font=CTK.CTkFont(family="terminal", size=20, weight="normal"),  text="Send Luggages to Gates", command=lambda: Model.Departures(departures_div))
+button = CTK.CTkButton(master=work_zone, width=250, height= 40, corner_radius=3,  text_color="Black",fg_color="#17AB99", hover_color="#84AAAF",font=CTK.CTkFont(family="terminal", size=20, weight="normal"),  text="Show Expected Departures", command=lambda: Model.Departures(departures_div))
 button.pack(pady=10, padx=50, side="top", anchor="nw")
 
+baggage_refusal_button = CTK.CTkButton(
+    master=work_zone,
+    width=250,
+    height=40,
+    corner_radius=3,
+    text_color="Black",
+    fg_color="#17AB99",
+    hover_color="#84AAAF",
+    font=CTK.CTkFont(family="terminal", size=20, weight="normal"),
+    text="Send Baggage to Gates",
+    command=lambda: [Model.DeparturesWithWeightLimit(departures_div,15), Model.RejectedBaggage(rejected_baggage_textbox)]
+)
+baggage_refusal_button.pack(pady=10, padx=50, side="top", anchor="nw")
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 work_zoneB = CTK.CTkFrame(master=work_zoneA, width=400, height=600,  fg_color="black", border_color="#17AB99", border_width=1)
@@ -82,9 +95,19 @@ passanger_input.pack(pady=5, padx=5, side="left")
 button2 = CTK.CTkButton(master=passanger_frame, width=300, height=40, corner_radius=3, text_color="Black", fg_color="#17AB99", font=CTK.CTkFont(family="terminal", size=20, weight="normal"), hover_color="#84AAAF", text="Check Passanger By Passport Number", command=lambda: Model.OwnerProfile(passanger_input.get(), work_zoneB))
 button2.pack(pady=5, padx=5, side="left")
 
+rejected_baggage_frame = CTK.CTkFrame(master=work_zoneA, fg_color="black")
+rejected_baggage_frame.pack(pady=10, padx=20, side="bottom", fill="x")
 
+rejected_baggage_label = CTK.CTkLabel(master=rejected_baggage_frame, text="Rejected Baggage", font=CTK.CTkFont(family="terminal", size=20, weight="bold"))
+rejected_baggage_label.pack(pady=5, padx=5, side="top")
 
+rejected_baggage_frameB = CTK.CTkFrame(master=rejected_baggage_frame, fg_color="black")
+rejected_baggage_frameB.pack(pady=1, padx=1, side="bottom", fill="x")
 
+rejected_baggage_textbox = CTK.CTkTextbox(master=rejected_baggage_frameB, width=400, height=250, fg_color="black",
+                                          border_color="#17AB99", activate_scrollbars=True, border_width=1,
+                                          font=CTK.CTkFont(family="terminal", size=22, weight="bold"),text_color="red")
+rejected_baggage_textbox.pack(pady=5, padx=5, side="top")
 
 
 
